@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pioneer — Installation Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:   #0C1622;
+    --surface: #18222F;
+    --elevated:#131C28;
+    --ink:     #ECEFF4;
+    --muted:   #8693A6;
+    --line:    #233044;
+    --navy:    #1F70C2;
+    --blue:    #4A9DDB;
+    --blue-soft: rgba(31,112,194,0.14);
+    --blue-glow: rgba(31,112,194,0.32);
+    --comply:  #5BBF7F;
+    --partial: #E5A845;
+    --radius:  8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 15px/1.6 "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--elevated);
+    border-bottom: 1px solid var(--line);
+    padding: 56px 28px 52px;
+    text-align: center;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .brand-mark {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: linear-gradient(135deg,#2A87DC 0%,#1F70C2 55%,#185A9E 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 18px var(--blue-glow);
+    padding: 6px;
+  }
+  .brand-mark img { width: 100%; height: 100%; object-fit: contain;
+    background: #fff; border-radius: 50%; padding: 4px; }
+  .wordmark {
+    font-family: "Archivo", sans-serif; font-weight: 800;
+    font-size: 28px; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .wordmark span { color: var(--blue); }
+  .hero h1 {
+    font-family: "Archivo", sans-serif; font-weight: 800;
+    font-size: clamp(28px, 5vw, 46px); letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.15;
+  }
+  .hero p {
+    color: var(--muted); font-size: 16px; max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy); color: #fff;
+    padding: 16px 32px; border-radius: var(--radius);
+    font-weight: 700; font-size: 16px; text-decoration: none;
+    box-shadow: 0 6px 24px var(--blue-glow);
+    transition: background 0.15s, transform 0.08s, box-shadow 0.15s;
+  }
+  .btn-download:hover {
+    background: #2A87DC; color: #fff;
+    box-shadow: 0 8px 32px var(--blue-glow); transform: translateY(-1px);
+  }
+  .btn-download:active { transform: translateY(0); }
+  .btn-download svg { flex-shrink: 0; }
+  .hero-note {
+    margin-top: 14px; font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px; color: var(--muted); letter-spacing: 0.06em;
+  }
+  .hero-note a { color: var(--muted); }
+  .hero-note a:hover { color: var(--blue); }
+
+  /* ── Layout ── */
+  .page { max-width: 760px; margin: 0 auto; padding: 48px 28px 80px; }
+
+  /* ── Section headings ── */
+  .section-label {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: "Archivo", sans-serif; font-weight: 800;
+    font-size: 22px; color: var(--ink); margin-bottom: 24px;
+  }
+
+  /* ── Steps ── */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: grid; grid-template-columns: 48px 1fr;
+    gap: 0 20px; position: relative;
+  }
+  .step:not(:last-child)::before {
+    content: ""; position: absolute;
+    left: 23px; top: 48px; bottom: -8px;
+    width: 2px; background: var(--line);
+  }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "IBM Plex Mono", monospace; font-weight: 600;
+    font-size: 15px; color: var(--blue); flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .step-body { padding-bottom: 32px; padding-top: 10px; }
+  .step-body h3 {
+    font-family: "Archivo", sans-serif; font-weight: 700;
+    font-size: 16px; color: var(--ink); margin-bottom: 8px;
+  }
+  .step-body p { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  /* ── Code / command blocks ── */
+  .cmd {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--elevated); border: 1px solid var(--line);
+    border-radius: 6px; padding: 10px 16px; margin: 6px 0;
+    font-family: "IBM Plex Mono", monospace; font-size: 13px;
+    color: var(--blue); cursor: pointer; transition: border-color 0.15s;
+    user-select: all;
+  }
+  .cmd:hover { border-color: var(--navy); }
+  .cmd .copy-icon { color: var(--muted); flex-shrink: 0; }
+  .cmd.copied { color: var(--comply); border-color: var(--comply); }
+
+  /* ── Callout boxes ── */
+  .callout {
+    border-radius: var(--radius); padding: 14px 18px;
+    font-size: 13.5px; margin: 12px 0;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .callout.warn {
+    background: rgba(229,168,69,0.08);
+    border-left: 3px solid var(--partial);
+    color: #F5C96A;
+  }
+  .callout.info {
+    background: var(--blue-soft);
+    border-left: 3px solid var(--navy);
+    color: var(--ink);
+  }
+  .callout .icon { flex-shrink: 0; margin-top: 1px; }
+  .callout p { margin: 0; }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px solid var(--line); margin: 48px 0; }
+
+  /* ── Update section ── */
+  .update-card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .update-card h3 {
+    font-family: "Archivo", sans-serif; font-weight: 700;
+    font-size: 17px; color: var(--ink); margin-bottom: 8px;
+  }
+  .update-card p { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+
+  /* ── Troubleshoot ── */
+  .trouble { display: flex; flex-direction: column; gap: 12px; }
+  .trouble-item {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .trouble-q {
+    padding: 14px 18px; font-weight: 600; font-size: 14px;
+    color: var(--ink); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .trouble-q:hover { background: var(--elevated); }
+  .trouble-a {
+    padding: 0 18px; max-height: 0; overflow: hidden;
+    transition: max-height 0.2s ease, padding 0.2s ease;
+    color: var(--muted); font-size: 13.5px;
+  }
+  .trouble-item.open .trouble-a {
+    padding: 0 18px 16px; max-height: 200px;
+  }
+  .trouble-item.open .chevron { transform: rotate(180deg); }
+  .chevron { transition: transform 0.2s; color: var(--muted); flex-shrink: 0; }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--elevated); border-top: 1px solid var(--line);
+    padding: 28px; text-align: center;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 36px; }
+    .page { padding: 32px 16px 60px; }
+    .step { grid-template-columns: 40px 1fr; }
+    .step-num { width: 40px; height: 40px; font-size: 13px; }
+    .step:not(:last-child)::before { left: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="brand">
+    <div class="brand-mark">
+      <img src="https://raw.githubusercontent.com/michaelsuppan-dot/Pioneer-D/main/docs/logo.png"
+           alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="wordmark">PIONEER<span>.</span></div>
+  </div>
+  <h1>Get Pioneer running<br>in four steps</h1>
+  <p>RFP response engine for Motorola Solutions, Avigilon &amp; Pelco.
+     Everything below takes about 20–30 minutes on first install.</p>
+
+  <a class="btn-download"
+     href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/installer.zip"
+     download>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Download installer.zip
+  </a>
+
+  <div class="hero-note">
+    Latest release ·
+    <a href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest"
+       target="_blank" rel="noopener">view on GitHub ↗</a>
+  </div>
+</div>
+
+<!-- ── Guide ─────────────────────────────────────────────────────────────── -->
+<div class="page">
+
+  <div class="section-label">Installation guide</div>
+  <h2>Follow these steps in order</h2>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Install Python 3.14</h3>
+        <p>Pioneer requires Python 3.14 or newer. If you already have it, skip to step 2.</p>
+        <p>
+          1. Go to
+          <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>
+          and download the latest 3.14 installer.<br>
+          2. Run the installer.
+        </p>
+        <div class="callout warn">
+          <span class="icon">⚠</span>
+          <p><strong>Check "Add python.exe to PATH"</strong> at the bottom of the installer screen before clicking Install Now. The box is unchecked by default — if you miss it, Python won't be found.</p>
+        </div>
+        <p>3. After installation finishes, <strong>restart your computer</strong>.</p>
+        <p>4. Verify it worked — open Command Prompt and run:</p>
+        <div class="cmd" data-copy="python --version">
+          <span>python --version</span>
+          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </div>
+        <p>You should see <span class="mono" style="color:var(--blue)">Python 3.14.x</span>.
+           If you get "not recognized", the PATH box was missed — uninstall and reinstall with it checked.</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Download &amp; extract the installer</h3>
+        <p>Click the button at the top of this page to download <strong>installer.zip</strong>,
+           or use the direct link:</p>
+        <a class="cmd" style="text-decoration:none; display:inline-flex;"
+           href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/installer.zip"
+           download>
+          <span>installer.zip</span>
+          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </a>
+        <p style="margin-top:10px">Right-click the downloaded file → <strong>Extract All</strong> →
+           choose a permanent folder, e.g. <span class="mono" style="color:var(--blue)">Documents\Pioneer-Installer</span>.
+           Don't delete this folder after install — you'll need it for updates.</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Run the installer</h3>
+        <p>Open the extracted folder. Hold <strong>Shift</strong> and right-click on empty space,
+           then click <strong>Open PowerShell window here</strong>.</p>
+        <p>Type the following and press Enter:</p>
+        <div class="cmd" data-copy="python install.py">
+          <span>python install.py</span>
+          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </div>
+        <div class="callout info">
+          <span class="icon">ℹ</span>
+          <p>The installer downloads ~3 GB total (Ollama + AI model). Leave the window open.
+             If a download is blocked by your network, the installer will show you a direct link
+             and wait for you to download it manually before continuing.</p>
+        </div>
+        <p>When you see <span class="mono" style="color:var(--comply)">INSTALLATION COMPLETE!</span>
+           you're done.</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step" style="--last:1">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Launch Pioneer</h3>
+        <p>Open the <strong>Pioneer</strong> folder that was created during install.
+           Double-click <strong>start.bat</strong>.</p>
+        <p>Your browser will open automatically at
+           <span class="mono" style="color:var(--blue)">http://localhost:8000</span></p>
+        <p>Your access code is in the <span class="mono" style="color:var(--blue)">Pioneer\.env</span>
+           file — open it with Notepad and look for <span class="mono" style="color:var(--blue)">ACCESS_CODE</span>.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- Updates -->
+  <div class="section-label">Keeping Pioneer up to date</div>
+  <h2>Getting updates</h2>
+  <div class="update-card">
+    <h3>Run the updater</h3>
+    <p>When a new version is available, Pioneer will show an amber <strong>"update available"</strong>
+       chip in the top-right of the interface. To install it:</p>
+    <p>Open PowerShell in your <strong>Pioneer-Installer</strong> folder and run:</p>
+    <div class="cmd" data-copy="python update.py">
+      <span>python update.py</span>
+      <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+    </div>
+    <p>Type <strong>Y</strong> to confirm. Your data and settings are preserved automatically.
+       The AI model and Ollama are never re-downloaded — only the app code updates.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Troubleshooting -->
+  <div class="section-label">Troubleshooting</div>
+  <h2>Common issues</h2>
+  <div class="trouble">
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        "python is not recognized as a command"
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        You missed the "Add python.exe to PATH" checkbox during Python installation.
+        Uninstall Python from Control Panel, reinstall from python.org, and check that box before clicking Install Now.
+        Restart your computer afterwards.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        A download fails or gets blocked
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        The installer will print a direct GitHub link and pause. Open that link in your browser,
+        download the file, move it into the installer folder, then press Enter in the installer window to continue.
+        If GitHub itself is blocked, ask IT to whitelist github.com and objects.githubusercontent.com.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        Installer is stuck or taking very long
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        The AI model is ~2 GB — on a slower connection this can take 20–30 minutes.
+        Do not close the window. If it does fail, run python install.py again —
+        it skips any steps that already completed.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        Antivirus is blocking the installer
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        Add the Pioneer-Installer folder to your antivirus exclusion list,
+        then re-run python install.py.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        Pioneer opens but shows no answers (everything is "Needs SME Review")
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        The knowledge base is empty. Go to the Knowledge Base tab and upload
+        the product datasheets (PDF or DOCX). Without datasheets loaded,
+        Pioneer has nothing to answer from.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+<footer>
+  Pioneer · Motorola Solutions / Avigilon / Pelco ·
+  <a href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest"
+     target="_blank" rel="noopener" style="color:var(--muted)">
+    releases ↗
+  </a>
+</footer>
+
+<script>
+// Copy-to-clipboard on .cmd clicks
+document.querySelectorAll(".cmd[data-copy]").forEach((el) => {
+  el.addEventListener("click", () => {
+    navigator.clipboard.writeText(el.dataset.copy).then(() => {
+      el.classList.add("copied");
+      const orig = el.querySelector("span").textContent;
+      el.querySelector("span").textContent = "copied!";
+      setTimeout(() => {
+        el.classList.remove("copied");
+        el.querySelector("span").textContent = orig;
+      }, 1600);
+    }).catch(() => {});
+  });
+});
+
+// Accordion for troubleshooting
+document.querySelectorAll(".trouble-q").forEach((q) => {
+  q.addEventListener("click", () => {
+    const item = q.closest(".trouble-item");
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".trouble-item").forEach((i) => i.classList.remove("open"));
+    if (!wasOpen) item.classList.add("open");
+  });
+});
+</script>
+</body>
+</html>
