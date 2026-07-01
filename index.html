@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -229,7 +229,7 @@
   </div>
   <h1>Get Pioneer running<br>in four steps</h1>
   <p>RFP response engine for Motorola Solutions, Avigilon &amp; Pelco.
-     Everything below takes about 10&ndash;15 minutes on first install.</p>
+     Everything below takes about 15&ndash;30 minutes on first install.</p>
 
   <a class="btn-download"
      href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/installer.zip"
@@ -309,6 +309,13 @@
         <p style="margin-top:10px">Right-click the downloaded file &rarr; <strong>Extract All</strong> &rarr;
            choose a permanent folder, e.g. <span class="mono" style="color:var(--blue)">Documents\Pioneer-Installer</span>.
            Don't delete this folder after install &mdash; you'll need it for updates.</p>
+        <div class="callout info">
+          <span class="icon">&#8505;</span>
+          <p><strong>The zip is large (~1.2 GB)</strong> because it now bundles the Ollama installer directly &mdash;
+             this avoids the "setup files are corrupted" error some networks caused when Ollama was downloaded
+             separately during install. If the zip won't extract, it was corrupted in transit &mdash;
+             ask a coworker to send you their extracted folder via Teams or USB.</p>
+        </div>
       </div>
     </div>
 
@@ -329,9 +336,9 @@
         </div>
         <div class="callout info">
           <span class="icon">&#8505;</span>
-          <p>The installer downloads ~3 GB total (Ollama + AI model). Leave the window open.
-             If a download is blocked by your network, the installer will show you a direct link
-             and wait for you to download it manually before continuing.</p>
+          <p>The installer uses the bundled Ollama and downloads the ~2 GB AI model from GitHub.
+             Leave the window open. If the model download is blocked by your network, the installer
+             will show you a direct link and wait for you to download it manually before continuing.</p>
         </div>
         <p>When you see <span class="mono" style="color:var(--comply)">INSTALLATION COMPLETE!</span>
            you're done.</p>
@@ -394,6 +401,23 @@
         You missed the "Add python.exe to PATH" checkbox during Python installation.
         Uninstall Python from Control Panel, reinstall from python.org, and check that box before clicking Install Now.
         Restart your computer afterwards.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        "The setup files are corrupted"
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        Your network's SSL-inspection proxy is corrupting large binary downloads. As of v1.2.2,
+        the installer verifies the Ollama installer's SHA-256 hash before running it and prefers
+        a pre-bundled copy from installer.zip, so this error should no longer occur.
+        If you still hit it, ask a coworker with a working install to zip and send you their
+        extracted Pioneer-Installer folder directly (Teams / SharePoint / USB).
       </div>
     </div>
 
