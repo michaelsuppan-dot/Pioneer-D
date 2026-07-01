@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -401,6 +401,26 @@
         You missed the "Add python.exe to PATH" checkbox during Python installation.
         Uninstall Python from Control Panel, reinstall from python.org, and check that box before clicking Install Now.
         Restart your computer afterwards.
+      </div>
+    </div>
+
+    <div class="trouble-item">
+      <div class="trouble-q">
+        Windows Explorer says "Access denied" or won't extract the zip
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="trouble-a">
+        The built-in Windows zip tool sometimes refuses to extract files over 1 GB that were downloaded from the internet.
+        The file is not corrupted &mdash; Windows is just being cautious.
+        Fix: open PowerShell (Start menu &rarr; type "PowerShell"), and paste this in one go:
+        <br><br>
+        <span class="mono" style="color:var(--blue)">Expand-Archive -Path $env:USERPROFILE\Downloads\installer.zip -DestinationPath $env:USERPROFILE\Documents\Pioneer-Installer -Force</span>
+        <br><br>
+        This extracts the zip into a folder called <span class="mono" style="color:var(--blue)">Pioneer-Installer</span> under your Documents.
+        Then continue with step 3 in that folder.
       </div>
     </div>
 
