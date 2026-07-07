@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -232,7 +232,7 @@
      Everything below takes about 15&ndash;30 minutes on first install.</p>
 
   <a class="btn-download"
-     href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/installer.zip"
+     href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/Pioneer-Setup-1.2.2-NoBundle.exe"
      download>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -240,13 +240,14 @@
       <polyline points="7 10 12 15 17 10"/>
       <line x1="12" y1="15" x2="12" y2="3"/>
     </svg>
-    Download installer.zip
+    Download Pioneer Setup (~2 MB)
   </a>
 
   <div class="hero-note">
-    Latest release &middot;
+    Latest release v1.2.2 &middot;
     <a href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest"
        target="_blank" rel="noopener">view on GitHub &#8599;</a>
+    &middot; No-extract installer &mdash; just run it
   </div>
 </div>
 
@@ -262,29 +263,18 @@
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>Install Python 3.14</h3>
-        <p>Pioneer requires Python 3.14 or newer. If you already have it, skip to step 2.</p>
+        <h3>Install Python 3.12 or newer</h3>
+        <p>Pioneer requires Python 3.12+. If you already have it, skip to step 2.</p>
         <p>
-          1. Go to
+          Go to
           <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>
-          and download the latest 3.14 installer.<br>
-          2. Run the installer.
+          and download the latest installer, then run it.
         </p>
         <div class="callout warn">
           <span class="icon">&#9888;</span>
-          <p><strong>Check "Add python.exe to PATH"</strong> at the bottom of the installer screen before clicking Install Now. The box is unchecked by default &mdash; if you miss it, Python won't be found.</p>
+          <p><strong>Check "Add python.exe to PATH"</strong> at the bottom of the installer screen before clicking Install Now. The box is unchecked by default &mdash; if you miss it, Pioneer Setup won't find Python.</p>
         </div>
-        <p>3. After installation finishes, <strong>restart your computer</strong>.</p>
-        <p>4. Verify it worked &mdash; open Command Prompt and run:</p>
-        <div class="cmd" data-copy="python --version">
-          <span>python --version</span>
-          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-        </div>
-        <p>You should see <span class="mono" style="color:var(--blue)">Python 3.14.x</span>.
-           If you get "not recognized", the PATH box was missed &mdash; uninstall and reinstall with it checked.</p>
+        <p>After installation finishes, <strong>restart your computer</strong>.</p>
       </div>
     </div>
 
@@ -292,29 +282,15 @@
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>Download &amp; extract the installer</h3>
-        <p>Click the button at the top of this page to download <strong>installer.zip</strong>,
-           or use the direct link:</p>
-        <a class="cmd" style="text-decoration:none; display:inline-flex;"
-           href="https://github.com/michaelsuppan-dot/Pioneer-D/releases/latest/download/installer.zip"
-           download>
-          <span>installer.zip</span>
-          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
-        <p style="margin-top:10px">Right-click the downloaded file &rarr; <strong>Extract All</strong> &rarr;
-           choose a permanent folder, e.g. <span class="mono" style="color:var(--blue)">Documents\Pioneer-Installer</span>.
-           Don't delete this folder after install &mdash; you'll need it for updates.</p>
+        <h3>Download &amp; run Pioneer Setup</h3>
+        <p>Click the button at the top of this page to download <strong>Pioneer-Setup-1.2.2-NoBundle.exe</strong>, then double-click it to run.</p>
         <div class="callout info">
           <span class="icon">&#8505;</span>
-          <p><strong>The zip is large (~1.2 GB)</strong> because it now bundles the Ollama installer directly &mdash;
-             this avoids the "setup files are corrupted" error some networks caused when Ollama was downloaded
-             separately during install. If the zip won't extract, it was corrupted in transit &mdash;
-             ask a coworker to send you their extracted folder via Teams or USB.</p>
+          <p>The setup wizard extracts the installer files and then automatically launches the Pioneer installer in a separate window. It downloads Ollama (~1.2 GB) and the AI model (~2 GB) from GitHub during installation.</p>
+        </div>
+        <div class="callout warn">
+          <span class="icon">&#9888;</span>
+          <p><strong>Do NOT close the black installer window</strong> until it says <strong>INSTALLATION COMPLETE</strong>. Installation takes 15&ndash;30 minutes depending on your internet speed.</p>
         </div>
       </div>
     </div>
@@ -323,25 +299,22 @@
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>Run the installer</h3>
-        <p>Open the extracted folder. Hold <strong>Shift</strong> and right-click on empty space,
-           then click <strong>Open PowerShell window here</strong>.</p>
-        <p>Type the following and press Enter:</p>
-        <div class="cmd" data-copy="python install.py">
-          <span>python install.py</span>
-          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-        </div>
+        <h3>Wait for INSTALLATION COMPLETE</h3>
+        <p>The black window will walk through 7 steps automatically:</p>
+        <p style="color:var(--muted); font-size:13px; line-height:1.8">
+          1. Python version check<br>
+          2. Download Pioneer app<br>
+          3. Extract Pioneer app<br>
+          4. Install Ollama<br>
+          5. Download AI model (~2 GB &mdash; the slow step)<br>
+          6. Set up Python environment<br>
+          7. Set up Ollama model
+        </p>
+        <p>When you see <span class="mono" style="color:var(--comply)">INSTALLATION COMPLETE!</span> you're done.</p>
         <div class="callout info">
           <span class="icon">&#8505;</span>
-          <p>The installer uses the bundled Ollama and downloads the ~2 GB AI model from GitHub.
-             Leave the window open. If the model download is blocked by your network, the installer
-             will show you a direct link and wait for you to download it manually before continuing.</p>
+          <p>If a download is blocked by your network, the installer will show a direct link and wait. Download the file manually, move it into the installer folder shown on screen, then press Enter to continue.</p>
         </div>
-        <p>When you see <span class="mono" style="color:var(--comply)">INSTALLATION COMPLETE!</span>
-           you're done.</p>
       </div>
     </div>
 
@@ -350,7 +323,7 @@
       <div class="step-num">4</div>
       <div class="step-body">
         <h3>Launch Pioneer</h3>
-        <p>Open the <strong>Pioneer</strong> folder that was created during install.
+        <p>Open the <strong>Pioneer</strong> folder inside your Documents folder.
            Double-click <strong>start.bat</strong>.</p>
         <p>Your browser will open automatically at
            <span class="mono" style="color:var(--blue)">http://localhost:8000</span></p>
@@ -406,43 +379,6 @@
 
     <div class="trouble-item">
       <div class="trouble-q">
-        Windows Explorer says "Access denied" or won't extract the zip
-        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </div>
-      <div class="trouble-a">
-        The built-in Windows zip tool sometimes refuses to extract files over 1 GB that were downloaded from the internet.
-        The file is not corrupted &mdash; Windows is just being cautious.
-        Fix: open PowerShell (Start menu &rarr; type "PowerShell"), and paste this in one go:
-        <br><br>
-        <span class="mono" style="color:var(--blue)">Expand-Archive -Path $env:USERPROFILE\Downloads\installer.zip -DestinationPath $env:USERPROFILE\Documents\Pioneer-Installer -Force</span>
-        <br><br>
-        This extracts the zip into a folder called <span class="mono" style="color:var(--blue)">Pioneer-Installer</span> under your Documents.
-        Then continue with step 3 in that folder.
-      </div>
-    </div>
-
-    <div class="trouble-item">
-      <div class="trouble-q">
-        "The setup files are corrupted"
-        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </div>
-      <div class="trouble-a">
-        Your network's SSL-inspection proxy is corrupting large binary downloads. As of v1.2.2,
-        the installer verifies the Ollama installer's SHA-256 hash before running it and prefers
-        a pre-bundled copy from installer.zip, so this error should no longer occur.
-        If you still hit it, ask a coworker with a working install to zip and send you their
-        extracted Pioneer-Installer folder directly (Teams / SharePoint / USB).
-      </div>
-    </div>
-
-    <div class="trouble-item">
-      <div class="trouble-q">
         A download fails or gets blocked
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -451,7 +387,7 @@
       </div>
       <div class="trouble-a">
         The installer will print a direct GitHub link and pause. Open that link in your browser,
-        download the file, move it into the installer folder, then press Enter in the installer window to continue.
+        download the file, move it into the installer folder shown on screen, then press Enter in the installer window to continue.
         If GitHub itself is blocked, ask IT to whitelist github.com and objects.githubusercontent.com.
       </div>
     </div>
@@ -466,22 +402,25 @@
       </div>
       <div class="trouble-a">
         The AI model is ~2 GB &mdash; on a slower connection this can take 20&ndash;30 minutes.
-        Do not close the window. If it does fail, run python install.py again &mdash;
-        it skips any steps that already completed.
+        Step 7 (Ollama model setup) can also take a few minutes silently &mdash; this is normal.
+        Do not close the window. If it does fail, re-run Pioneer-Setup-1.2.2-NoBundle.exe &mdash;
+        completed steps are skipped automatically.
       </div>
     </div>
 
     <div class="trouble-item">
       <div class="trouble-q">
-        Antivirus is blocking the installer
+        Cortex XDR or antivirus is blocking the installer
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"/>
         </svg>
       </div>
       <div class="trouble-a">
-        Add the Pioneer-Installer folder to your antivirus exclusion list,
-        then re-run python install.py.
+        Pioneer Setup is an internal Motorola Solutions tool. If it is blocked, contact IT and ask them
+        to add an exception for <strong>Pioneer-Setup-1.2.2-NoBundle.exe</strong> and the
+        <strong>PioneerInstaller</strong> folder in your Documents. Pioneer Setup does not use cmd.exe &mdash;
+        it launches Python directly, which should pass most behavioral threat policies.
       </div>
     </div>
 
